@@ -1,1 +1,95 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary-color: #1C1C1C;
+    --background-color: #FAFAFA;
+    --primary-text-color: #1C1C1C;
+    --secondary-text-color: #ADB5BD;
+    --stroke-color: #DEE2E6;
+    --white-button-text: #FAFAFA;
+}
+
+[data-theme="dark"] {
+    --primary-color: #FAFAFA;
+    --background-color: #1C1C1C;
+    --primary-text-color: #FAFAFA;
+    --secondary-text-color: #EAEAEA;
+    --stroke-color: #495057;
+}
+
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* 3. Set core body defaults */
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+    font-family: "Inter Tight", sans-serif;
+}
+
+/* 4. Remove list styles on ul, ol elements with a list role */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+/* 5. Anchor tag defaults */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 6. Make images easier to work with */
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+/* 7. Inherit fonts for form elements */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* 8. Remove built-in form element styles */
+button,
+input {
+    border: none;
+    background: none;
+    outline: none;
+}
+
+/* 9. Respect user preferences for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
