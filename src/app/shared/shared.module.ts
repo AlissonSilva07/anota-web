@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { CustomButtonComponent } from './components/custom-button/custom-button.component';
+import { CustomImgPickerComponent } from './components/custom-img-picker/custom-img-picker.component';
 
 @NgModule({
   imports: [
@@ -10,11 +11,13 @@ import { CustomButtonComponent } from './components/custom-button/custom-button.
     FormsModule,
     ReactiveFormsModule,
     CustomInputComponent,
-    CustomButtonComponent
+    CustomButtonComponent,
+    CustomImgPickerComponent
   ],
   exports: [
     CustomInputComponent,
-    CustomButtonComponent
+    CustomButtonComponent,
+    CustomImgPickerComponent
   ]
 })
 export class SharedModule { }

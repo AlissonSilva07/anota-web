@@ -1,1 +1,16 @@
-<p>register works!</p>
+<div class="container">
+    <div class="content">
+        <h2 class="title">Cadastre-se</h2>
+
+        <app-custom-img-picker></app-custom-img-picker>
+
+        <div class="input-area">
+            <app-custom-input placeholder="Nome" [type]="CustomInputType.DEFAULT"></app-custom-input>
+            <app-custom-input placeholder="Email" [type]="CustomInputType.DEFAULT"></app-custom-input>
+            <app-custom-input placeholder="Senha" [type]="CustomInputType.PASSWORD"></app-custom-input>
+            <app-custom-input placeholder="Repetir senha" [type]="CustomInputType.PASSWORD"></app-custom-input>
+            <app-custom-button [type]="CustomButtonType.DEFAULT">Cadastrar</app-custom-button>
+        </div>
+        <a class="link-style" href="/login">Já tem conta? Faça login</a>
+    </div>
+</div>
