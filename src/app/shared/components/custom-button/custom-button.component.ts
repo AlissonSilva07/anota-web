@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './custom-button.component.css'
 })
 export class CustomButtonComponent {
+  @Input() action: () => void = () => { };
   private _type = signal<CustomButtonType>(CustomButtonType.DEFAULT);
 
   @Input()

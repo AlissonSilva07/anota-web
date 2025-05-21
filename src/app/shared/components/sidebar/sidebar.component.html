@@ -1,0 +1,24 @@
+<nav class="container">
+    <div class="top">
+        <app-logo-svg></app-logo-svg>
+        <div class="nav-items">
+            @for (item of items; track $index) {
+            <button class="nav-item" [class.active-button]="isActive(item.route, true)"
+                (click)="navigateTo(item.route)">
+                <i class="material-icons-outlined nav-item-icon">{{ item.icon }}</i>
+                <p class="nav-item-label">{{ item.title }}</p>
+            </button>
+            } @empty {
+            <p>Sem itens.</p>
+            }
+        </div>
+    </div>
+    <div class="bottom">
+        <button class="bottom-button">
+            <i class="material-icons-outlined bottom-button-icon">more_horiz</i>
+        </button>
+        <button class="bottom-button">
+            <i class="material-icons-outlined bottom-button-icon">light_mode</i>
+        </button>
+    </div>
+</nav>

@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { CustomButtonComponent } from './components/custom-button/custom-button.component';
 import { CustomImgPickerComponent } from './components/custom-img-picker/custom-img-picker.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { LogoSvgComponent } from './components/logo-svg/logo-svg.component';
 
 @NgModule({
   imports: [
@@ -12,12 +14,16 @@ import { CustomImgPickerComponent } from './components/custom-img-picker/custom-
     ReactiveFormsModule,
     CustomInputComponent,
     CustomButtonComponent,
-    CustomImgPickerComponent
+    CustomImgPickerComponent,
+    SidebarComponent,
+    LogoSvgComponent
   ],
   exports: [
     CustomInputComponent,
     CustomButtonComponent,
-    CustomImgPickerComponent
+    CustomImgPickerComponent,
+    SidebarComponent,
+    LogoSvgComponent
   ]
 })
 export class SharedModule { }

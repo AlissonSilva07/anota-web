@@ -1,5 +1,4 @@
-<button
-  [ngStyle]="{
+<button [ngStyle]="{
     'width': '100%',
     'padding': '1rem',
     'background-color': 'var(' + bgColor() + ')',
@@ -8,9 +7,6 @@
     'border-radius': '0.5rem',
     'border': 'none',
     'cursor': isDisabled() ? 'not-allowed' : 'pointer',
-  }"
-  [disabled]="isDisabled()"
-  type="button"
->
+  }" [disabled]="isDisabled()" type="button" (click)="action()">
   <ng-content></ng-content>
 </button>
