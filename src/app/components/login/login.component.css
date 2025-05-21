@@ -26,3 +26,7 @@
     width: 120px;
     height: 120px;
 }
+
+.link-style {
+    text-decoration: underline;
+}
