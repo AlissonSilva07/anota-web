@@ -1,3 +1,20 @@
 <div class="container">
-    <p>home</p>
+    <div class="header">
+        <h2>Home</h2>
+
+        <div class="right-area">
+            <p *ngIf="isLoading()">Loading user data...</p>
+
+            <ng-container *ngIf="userData()">
+                <p>Olá, {{ userData()?.name }}</p>
+                <div class="avatar-wrapper">
+                    <img *ngIf="userData()?.profileImage; else defaultIcon" [src]="getProfileImageUrl()"
+                        alt="Profile Image" class="profile-image" />
+                    <ng-template #defaultIcon>
+                        <i class="material-icons-outlined">person</i>
+                    </ng-template>
+                </div>
+            </ng-container>
+        </div>
+    </div>
 </div>
