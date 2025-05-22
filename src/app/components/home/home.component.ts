@@ -26,9 +26,7 @@ export class HomeComponent implements OnInit {
     this.userData.set(null);
 
     this.userService.getUserData().subscribe({
-      next: (data) => {
-        console.log('User data fetched successfully:', data);
-        
+      next: (data) => {       
         this.userData.set(data);
         this.isLoading.set(false);
       },

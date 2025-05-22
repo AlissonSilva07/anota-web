@@ -22,6 +22,15 @@
     gap: 1rem;
 }
 
+.button-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    animation: spin 0.8s linear infinite;
+}
+
 .span-logo {
     display: flex;
     flex-direction: row;
@@ -46,8 +55,58 @@
 }
 
 .profile-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.resume-lastest-note {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.latest-note-card {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--stroke-color);
+    border-radius: 0.5rem;
+}
+
+.latest-note-card-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    background-color: var(--primary-color);
+    color: var(--white-button-text);
+}
+
+.icon {
+    font-size: 3rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

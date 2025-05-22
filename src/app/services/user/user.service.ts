@@ -22,16 +22,7 @@ export class UserService {
         }
 
         const uid = currentUser.uid;
-        console.log('Authenticated UID detected:', uid);
 
-        const localUser = this.localUserCache.get(uid);
-
-        if (localUser) {
-          console.log('Fetching user from local cache:', localUser);
-          return from([localUser]);
-        }
-
-        console.log('Fetching user from Firebase RTDB for UID:', uid);
         const userRef = ref(this.db, `users/${uid}`);
 
         return from(get(userRef)).pipe(

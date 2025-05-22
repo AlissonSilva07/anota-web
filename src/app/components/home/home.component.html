@@ -1,9 +1,8 @@
 <div class="container">
     <div class="header">
         <h2>Home</h2>
-
         <div class="right-area">
-            <p *ngIf="isLoading()">Loading user data...</p>
+            <div *ngIf="isLoading()" class="button-spinner"></div>
 
             <ng-container *ngIf="userData()">
                 <p>Olá, {{ userData()?.name }}</p>
@@ -15,6 +14,21 @@
                     </ng-template>
                 </div>
             </ng-container>
+        </div>
+    </div>
+    <div class="content">
+        <div class="resume-lastest-note">
+            <h3>Continue de onde parou</h3>
+
+            <div class="latest-note-card">
+                <div class="latest-note-card-icon">
+                    <i class="material-icons-outlined icon">edit</i>
+                </div>
+                <div class="latest-note-card-content">
+                    <h4>Nome da Nota</h4>
+                    <p>Descrição da nota</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
