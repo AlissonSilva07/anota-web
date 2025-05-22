@@ -5,6 +5,7 @@ import { MainComponent } from './components/main/main.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { authGuard } from './guards/auth.guard';
+import { EspacosComponent } from './components/espacos/espacos.component';
 
 export const routes: Routes = [
     {
@@ -33,6 +34,10 @@ export const routes: Routes = [
             {
                 path: 'home',
                 component: HomeComponent
+            },
+            {
+                path: 'espacos',
+                component: EspacosComponent
             }
         ]
     },

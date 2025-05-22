@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { LogoSvgComponent } from "../logo-svg/logo-svg.component";
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
@@ -25,50 +25,59 @@ export class SidebarComponent implements OnInit {
       id: 1,
       title: 'Home',
       icon: 'home',
-      route: '/home'
+      route: '/main/home'
     },
     {
       id: 2,
       title: 'Espaços',
       icon: 'workspaces',
-      route: '/espacos'
+      route: '/main/espacos'
     },
     {
       id: 3,
       title: 'Pesquisar',
       icon: 'search',
-      route: '/pesquisar'
+      route: '/main/pesquisar'
     },
     {
       id: 4,
       title: 'Perfil',
       icon: 'person',
-      route: '/perfil'
+      route: '/main/perfil'
     }
   ];
 
-  currentRoute: string = '';
+  currentRoute = signal<string>('');
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.currentRoute.set(this.router.url);
+
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      this.currentRoute = event.urlAfterRedirects;
+      this.currentRoute.set(event.urlAfterRedirects);
     });
   }
 
   navigateTo(path: string): void {
+    const current = this.currentRoute();
+
+    if (current === path) {
+      return;
+    }
+
     this.router.navigate([path]);
   }
 
   isActive(path: string, exact: boolean = false): boolean {
-    if (exact) {
-      return this.currentRoute === path;
-    }
-    return this.currentRoute.startsWith(path) &&
-      (this.currentRoute.length === path.length || this.currentRoute[path.length] === '/' || this.currentRoute[path.length] === '?');
+    const current = this.currentRoute();
+    const result = exact
+      ? current === path
+      : current.startsWith(path) &&
+      (current.length === path.length || current[path.length] === '/' || current[path.length] === '?');
+    return result;
   }
 
   logout(): void {
