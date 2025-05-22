@@ -1,0 +1,96 @@
+.toast {
+    position: relative;
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    overflow: hidden;
+    min-width: 250px;
+    max-width: 350px;
+    box-sizing: border-box;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.toast-icon {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.toast-content p {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: var(--primary-text-color);
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0;
+    line-height: 1;
+}
+
+.toast-close:hover {
+    opacity: 0.8;
+}
+
+.toast-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    animation: progress-shrink linear forwards;
+    transform-origin: left;
+}
+
+@keyframes progress-shrink {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+:host {
+    display: block;
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutToRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}

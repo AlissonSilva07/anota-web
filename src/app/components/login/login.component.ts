@@ -7,6 +7,7 @@ import { CustomButtonType } from '../../shared/components/custom-button/custom-b
 import { Router } from '@angular/router';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,11 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class LoginComponent {
   private router = inject(Router);
+  private toastService = inject(ToastService);
   error: boolean = false;
   fb: FormBuilder = inject(FormBuilder);
   authService: AuthService = inject(AuthService);
-  
+
   form = this.fb.nonNullable.group({
     email: [
       '',
@@ -38,11 +40,29 @@ export class LoginComponent {
     const rawForm = this.form.getRawValue();
     this.authService.login(rawForm.email, rawForm.password).subscribe({
       next: () => {
+        this.toastService.success('Login successful! Welcome back.', 3000);
         this.router.navigateByUrl('/main');
       },
       error: (error) => {
         this.error = true;
         console.error('Email/Password Sign-In error:', error);
+        let errorMessage = 'Login failed. Please try again.';
+        if (error.code) {
+          switch (error.code) {
+            case 'auth/user-not-found':
+            case 'auth/wrong-password':
+              errorMessage = 'Email ou senha incorretos.';
+              break;
+            case 'auth/invalid-email':
+              errorMessage = 'O email fornecido é inválido.';
+              break;
+            default:
+              errorMessage = error.message || 'Erro de servidor. Tente novamente mais tarde.';
+          }
+        } else if (error.message) {
+          errorMessage = error.message;
+        }
+        this.toastService.error(errorMessage, 3000);
       },
     });
   }

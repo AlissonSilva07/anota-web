@@ -6,6 +6,7 @@ import { CustomButtonComponent } from './components/custom-button/custom-button.
 import { CustomImgPickerComponent } from './components/custom-img-picker/custom-img-picker.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LogoSvgComponent } from './components/logo-svg/logo-svg.component';
+import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
 
 @NgModule({
   imports: [
@@ -16,14 +17,16 @@ import { LogoSvgComponent } from './components/logo-svg/logo-svg.component';
     CustomButtonComponent,
     CustomImgPickerComponent,
     SidebarComponent,
-    LogoSvgComponent
+    LogoSvgComponent,
+    CustomToastComponent
   ],
   exports: [
     CustomInputComponent,
     CustomButtonComponent,
     CustomImgPickerComponent,
     SidebarComponent,
-    LogoSvgComponent
+    LogoSvgComponent,
+    CustomToastComponent
   ]
 })
 export class SharedModule { }

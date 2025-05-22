@@ -1,0 +1,11 @@
+<div [@toastAnimation]="state" [ngClass]="'toast toast-' + type" (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()">
+    <div class="toast-content">
+        <span class="toast-icon material-icons-outlined">{{ getIcon() }}</span>
+        <p>{{ message }}</p>
+    </div>
+    <button class="toast-close" (click)="closeToast()">
+        <span class="material-icons">close</span>
+    </button>
+    <div *ngIf="showProgress" class="toast-progress-bar" [style.animationDuration.ms]="duration"></div>
+</div>

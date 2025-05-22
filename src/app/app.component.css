@@ -1,0 +1,22 @@
+.toast-container {
+    position: fixed;
+    top: 20px;
+    /* Adjust as needed for desired top padding */
+    right: 20px;
+    /* Adjust as needed for desired right padding */
+    z-index: 1000;
+    /* Ensure toasts are on top of other content */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* Align toasts to the right within the container */
+    pointer-events: none;
+    /* Allows clicks to pass through if no toast is present */
+}
+
+/* Individual toasts can have pointer-events: auto; to be clickable */
+.toast {
+    pointer-events: auto;
+    margin-bottom: 10px;
+    /* Space between toasts */
+}

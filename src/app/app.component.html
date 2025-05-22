@@ -1,1 +1,7 @@
 <router-outlet />
+
+<div class="toast-container">
+    <app-custom-toast *ngFor="let toast of toasts$ | async" [message]="toast.message" [type]="toast.type"
+        [duration]="toast.duration || 3000" [showProgress]="toast.showProgress || true" [toastId]="toast.id!"
+        (closed)="toastService.removeToast(toast.id!)"></app-custom-toast>
+</div>
