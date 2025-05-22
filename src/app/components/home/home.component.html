@@ -34,7 +34,7 @@
         <div class="manage-spaces">
             <h3>Gerencie seus espaços</h3>
             <div class="vertical-align">
-                @for (space of spaces; track $index) {
+                @for (space of spaces(); track $index) {
                 <div class="space-item-card">
                     <div class="description-group">
                         <div [ngStyle]="{

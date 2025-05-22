@@ -42,7 +42,6 @@ export class UserService {
                 }
 
                 this.localUserCache.set(uid, userData);
-                console.log('Fetched user from RTDB and cached:', userData);
                 return userData;
               } else {
                 throw new Error('User data is null from database.');
