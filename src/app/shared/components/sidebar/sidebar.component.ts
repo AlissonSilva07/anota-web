@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { LogoSvgComponent } from "../logo-svg/logo-svg.component";
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { AuthService } from '../../../services/auth/auth.service';
 
 interface NavTreeItem {
   id: number;
@@ -17,6 +18,8 @@ interface NavTreeItem {
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent implements OnInit {
+  authService: AuthService = inject(AuthService);
+
   items: NavTreeItem[] = [
     {
       id: 1,
@@ -46,7 +49,7 @@ export class SidebarComponent implements OnInit {
 
   currentRoute: string = '';
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.router.events.pipe(
@@ -65,6 +68,17 @@ export class SidebarComponent implements OnInit {
       return this.currentRoute === path;
     }
     return this.currentRoute.startsWith(path) &&
-           (this.currentRoute.length === path.length || this.currentRoute[path.length] === '/' || this.currentRoute[path.length] === '?');
+      (this.currentRoute.length === path.length || this.currentRoute[path.length] === '/' || this.currentRoute[path.length] === '?');
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigateByUrl('/');
+      },
+      error: (error) => {
+        console.error('Logout error:', error);
+      }
+    });
   }
 }

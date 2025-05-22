@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, Input, signal } from '@angular/core';
+import { Component, computed, EventEmitter, Input, Output, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomInputType } from './input-type.enum';
 
@@ -15,6 +15,10 @@ export class CustomInputComponent {
   @Input() placeholder: string = "";
   @Input() type: CustomInputType = CustomInputType.DEFAULT;
 
+  @Input() value: string = '';
+
+  @Output() valueChange = new EventEmitter<string>();
+
   isPasswordVisible = signal(false);
 
   showToggleIcon = computed(() => this.type === CustomInputType.PASSWORD);
@@ -28,4 +32,9 @@ export class CustomInputComponent {
     }
     return 'text';
   });
+
+  onInputChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.valueChange.emit(inputElement.value);
+  }
 }
