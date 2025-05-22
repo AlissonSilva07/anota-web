@@ -20,6 +20,18 @@
     font-size: 1rem;
 }
 
+.wrapper.input-error {
+    border-color: #f44336;
+}
+
+.wrapper:focus-within {
+  border: 1px solid var(--primary-text-color);
+}
+
+.wrapper.input-error:focus-within {
+  border-color: #d32f2f;
+}
+
 .eye-button {
     display: flex;
     align-items: center;

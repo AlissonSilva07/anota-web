@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { CustomInputComponent } from "../../shared/components/custom-input/custom-input.component";
 import { CustomInputType } from '../../shared/components/custom-input/input-type.enum';
 import { SharedModule } from "../../shared/shared.module";
@@ -21,6 +21,10 @@ export class LoginComponent {
   error: boolean = false;
   fb: FormBuilder = inject(FormBuilder);
   authService: AuthService = inject(AuthService);
+  loading = signal(false);
+
+  @ViewChild('emailInput') emailInputRef!: CustomInputComponent;
+  @ViewChild('passwordInput') passwordInputRef!: CustomInputComponent;
 
   form = this.fb.nonNullable.group({
     email: [
@@ -37,16 +41,31 @@ export class LoginComponent {
   CustomButtonType = CustomButtonType;
 
   onSubmit(): void {
+     this.form.markAllAsTouched();
+
+    if (this.form.invalid) {
+      this.toastService.warning('Por favor, preencha os campos antes de prosseguir.', 3000);
+      if (this.form.controls.email.invalid) {
+        this.emailInputRef.focus();
+      } else if (this.form.controls.password.invalid) {
+        this.passwordInputRef.focus();
+      }
+      return;
+    }
+
+    this.loading.set(true);
     const rawForm = this.form.getRawValue();
     this.authService.login(rawForm.email, rawForm.password).subscribe({
       next: () => {
-        this.toastService.success('Login successful! Welcome back.', 3000);
+        this.loading.set(false);
+        this.toastService.success('Sucesso ao fazer login.', 3000);
         this.router.navigateByUrl('/main');
       },
       error: (error) => {
+        this.loading.set(false);
         this.error = true;
-        console.error('Email/Password Sign-In error:', error);
-        let errorMessage = 'Login failed. Please try again.';
+        console.error('Falha ao fazer login:', error);
+        let errorMessage = 'Falha ao fazer login.';
         if (error.code) {
           switch (error.code) {
             case 'auth/user-not-found':
@@ -63,6 +82,7 @@ export class LoginComponent {
           errorMessage = error.message;
         }
         this.toastService.error(errorMessage, 3000);
+        this.passwordInputRef.focus();
       },
     });
   }

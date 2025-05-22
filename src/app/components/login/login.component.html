@@ -5,12 +5,13 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="input-area">
                 <app-custom-input placeholder="Email" [type]="CustomInputType.DEFAULT"
-                    [value]="form.controls.email.value"
-                    (valueChange)="form.controls.email.setValue($event)"></app-custom-input>
+                    [value]="form.controls.email.value" (valueChange)="form.controls.email.setValue($event)"
+                    [hasError]="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)"></app-custom-input>
                 <app-custom-input placeholder="Senha" [type]="CustomInputType.PASSWORD"
-                    [value]="form.controls.password.value"
-                    (valueChange)="form.controls.password.setValue($event)"></app-custom-input>
-                <app-custom-button [type]="CustomButtonType.DEFAULT">Entrar</app-custom-button>
+                    [value]="form.controls.password.value" (valueChange)="form.controls.password.setValue($event)"
+                    [hasError]="form.controls.password.invalid && (form.controls.password.dirty || form.controls.password.touched)"></app-custom-input>
+                <app-custom-button [type]="loading() ? CustomButtonType.DISABLED : CustomButtonType.DEFAULT"
+                    [disabled]="loading()">Entrar</app-custom-button>
             </div>
         </form>
         <a class="link-style" href="/registrar">Não tem conta? Cadastre-se</a>

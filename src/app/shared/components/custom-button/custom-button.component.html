@@ -1,4 +1,8 @@
 <button [ngStyle]="{
+    'display': 'flex',
+    'align-items': 'center',
+    'justify-content': 'center',
+    'gap': '0.5rem',
     'width': '100%',
     'padding': '1rem',
     'background-color': 'var(' + bgColor() + ')',
@@ -7,6 +11,7 @@
     'border-radius': '0.5rem',
     'border': 'none',
     'cursor': isDisabled() ? 'not-allowed' : 'pointer',
-  }" [disabled]="isDisabled()" type="submit" (click)="action()">
+  }" [disabled]="isDisabled()" type="submit">
+  <div *ngIf="isDisabled()" class="button-spinner"></div>
   <ng-content></ng-content>
 </button>

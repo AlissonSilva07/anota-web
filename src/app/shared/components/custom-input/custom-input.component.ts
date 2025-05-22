@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, computed, ElementRef, EventEmitter, Input, Output, signal, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomInputType } from './input-type.enum';
 
@@ -14,10 +14,10 @@ import { CustomInputType } from './input-type.enum';
 export class CustomInputComponent {
   @Input() placeholder: string = "";
   @Input() type: CustomInputType = CustomInputType.DEFAULT;
-
   @Input() value: string = '';
-
   @Output() valueChange = new EventEmitter<string>();
+  @Input() hasError: boolean = false;
+  @ViewChild('inputElement') inputElementRef!: ElementRef<HTMLInputElement>;
 
   isPasswordVisible = signal(false);
 
@@ -36,5 +36,9 @@ export class CustomInputComponent {
   onInputChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     this.valueChange.emit(inputElement.value);
+  }
+
+   public focus(): void {
+    this.inputElementRef.nativeElement.focus();
   }
 }

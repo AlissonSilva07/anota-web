@@ -10,13 +10,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './custom-button.component.css'
 })
 export class CustomButtonComponent {
-  @Input() action: () => void = () => { };
   private _type = signal<CustomButtonType>(CustomButtonType.DEFAULT);
 
   @Input()
   set type(value: CustomButtonType) {
     this._type.set(value);
   }
+
+  @Input() disabled: boolean = false;
 
   bgColor = computed(() => {
     switch (this._type()) {
@@ -40,5 +41,5 @@ export class CustomButtonComponent {
     }
   });
 
-  isDisabled = computed(() => this._type() === CustomButtonType.DISABLED);
+  isDisabled = computed(() => this.disabled || this._type() === CustomButtonType.DISABLED);
 }
