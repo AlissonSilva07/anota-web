@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 
 import { authGuard } from './guards/auth.guard';
 import { EspacosComponent } from './components/espacos/espacos.component';
+import { SearchComponent } from './components/search/search.component';
 
 export const routes: Routes = [
     {
@@ -38,6 +39,10 @@ export const routes: Routes = [
             {
                 path: 'espacos',
                 component: EspacosComponent
+            },
+            {
+                path: 'pesquisar',
+                component: SearchComponent
             }
         ]
     },

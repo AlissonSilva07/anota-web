@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="header">
+    <h2>Pesquisar</h2>
+  </div>
+
+  <div class="content">
+    <div class="search-bar">
+      <i class="material-icons-outlined">search</i>
+      <input type="text" [formControl]="searchControl" placeholder="Toque para pesquisar..." class="search-input" />
+    </div>
+
+    <div class="search-results">
+      <div *ngIf="isLoading()" class="loading-indicator">
+        <p>Pesquisando...</p>
+      </div>
+
+      <div *ngIf="error()" class="error-message">
+        <p>Erro: {{ error() }}</p>
+      </div>
+
+      @for (note of searchResults(); track note.id) {
+        <div class="latest-note-card">
+          <div class="latest-note-card-icon">
+            <i class="material-icons-outlined icon">edit</i>
+          </div>
+          <div class="latest-note-card-content">
+            <div class="latest-note-card-top-description">
+              <p class="latest-note-card-top-description-space">{{ note.spaceTitle }}</p>
+              <i class="material-icons-outlined chevron">chevron_right</i>
+              <h4>{{ note.title }}</h4>
+            </div>
+            <p>{{ note.content }}</p>
+          </div>
+        </div>
+      } @empty {
+        <div *ngIf="!isLoading() && !error() && searchControl.value && searchControl.value.trim().length > 0" class="no-results">
+          <p>Nenhuma nota encontrada para "{{ searchControl.value }}".</p>
+        </div>
+        <div *ngIf="!isLoading() && !error() && (!searchControl.value || searchControl.value.trim().length === 0)" class="initial-message">
+          <p>Comece a digitar para pesquisar suas notas.</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>

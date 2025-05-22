@@ -1,0 +1,93 @@
+.container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    gap: 1rem;
+}
+
+.header {
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 1rem 0 1rem;
+}
+
+.content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--stroke-color);
+    padding: 1rem;
+}
+
+.search-input {
+    font-size: 1.2rem;
+    color: var(--primary-text-color);
+}
+
+.search-results {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.resume-lastest-note {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.latest-note-card {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--stroke-color);
+    border-radius: 0.5rem;
+}
+
+.latest-note-card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    background-color: var(--primary-color);
+    color: var(--white-button-text);
+}
+
+.latest-note-card-top-description {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.latest-note-card-top-description-space {
+    color: var(--secondary-text-color);
+}
+
+.chevron {
+    color: var(--secondary-text-color);
+}
+
+.icon {
+    font-size: 1.5rem;
+}
