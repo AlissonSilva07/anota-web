@@ -30,5 +30,37 @@
                 </div>
             </div>
         </div>
+
+        <div class="manage-spaces">
+            <h3>Gerencie seus espaços</h3>
+            <div class="vertical-align">
+                @for (space of spaces; track $index) {
+                <div class="space-item-card">
+                    <div class="description-group">
+                        <div [ngStyle]="{
+                            'width': '20px',
+                            'height': '20px',
+                            'background-color': space.color,
+                            'border-radius': '100%',
+                            'border': '1px solid var(--stroke-color)',
+                        }"></div>
+                        <p>{{ space.title }}</p>
+                        <p class="space-count">({{ space.notes?.length }})</p>
+                    </div>
+                    <i class="material-icons-outlined">chevron_right</i>
+                </div>
+
+                <div class="divider" *ngIf="!$last"></div>
+                } @empty {
+                <p>Ainda não existem espaços no momento.</p>
+                }
+
+                <a class="link-style" href="/">Criar novo Espaço</a>
+            </div>
+        </div>
     </div>
+    <button class="floating-button">
+        <i class="material-icons-outlined">add</i>
+        <p>Nova Nota</p>
+    </button>
 </div>
