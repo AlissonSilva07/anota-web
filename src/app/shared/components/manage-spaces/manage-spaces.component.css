@@ -10,7 +10,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 0rem;
+    padding: 1rem 0rem;
     cursor: pointer;
 }
 
@@ -60,4 +60,8 @@
 .link-style:hover {
     background-color: var(--stroke-color);
     color: var(--primary-text-color);
+}
+
+.chevron-icon {
+    color: var(--primary-color);
 }
