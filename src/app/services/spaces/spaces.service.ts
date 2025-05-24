@@ -37,16 +37,16 @@ export class SpacesService {
 
                   const notesArray: Note[] | undefined = spaceData.notes
                     ? Object.keys(spaceData.notes).map(noteKey => {
-                        const noteData = spaceData.notes[noteKey];
-                        return {
-                            id: noteKey,
-                            title: noteData.title || '',
-                            content: noteData.content || '',
-                            spaceID: noteData.spaceID || key,
-                            spaceTitle: noteData.spaceTitle || '',
-                            createdAt: noteData.createdAt || '',
-                            updatedAt: noteData.updatedAt || ''
-                        } as Note;
+                      const noteData = spaceData.notes[noteKey];
+                      return {
+                        id: noteKey,
+                        title: noteData.title || '',
+                        content: noteData.content || '',
+                        spaceID: noteData.spaceID || key,
+                        spaceTitle: noteData.spaceTitle || '',
+                        createdAt: noteData.createdAt || '',
+                        updatedAt: noteData.updatedAt || ''
+                      } as Note;
                     })
                     : undefined;
 
@@ -79,11 +79,75 @@ export class SpacesService {
         console.error('Error in getSpaces pipeline:', error);
         let errorMessage = 'Failed to fetch spaces.';
         if (error instanceof Error) {
-            errorMessage = error.message;
+          errorMessage = error.message;
         } else if (error && typeof error === 'object' && 'code' in error && typeof error.code === 'string') {
-            errorMessage = `Firebase Error (${error.code}): ${error.message}`;
+          errorMessage = `Firebase Error (${error.code}): ${error.message}`;
         }
         return throwError(() => new Error(errorMessage));
+      })
+    );
+  }
+
+  getSpaceById(id: string): Observable<Space> {
+    if (!id) {
+      return throwError(() => new Error('Space ID must be provided.'));
+    }
+
+    return user(this.firebaseAuth).pipe(
+      take(1),
+      switchMap((currentUser: User | null) => {
+        if (!currentUser?.uid) {
+          return throwError(() => new Error('No authenticated user found.'));
+        }
+
+        const uid = currentUser.uid;
+        const spaceRef = ref(this.db, `users/${uid}/spaces/${id}`);
+
+        return from(get(spaceRef)).pipe(
+          map((snapshot: DataSnapshot) => {
+            if (snapshot.exists()) {
+              const spaceData = snapshot.val();
+
+              const notesArray: Note[] | undefined = spaceData.notes
+                ? Object.keys(spaceData.notes).map(noteKey => {
+                  const noteData = spaceData.notes[noteKey];
+                  return {
+                    id: noteKey,
+                    title: noteData.title || '',
+                    content: noteData.content || '',
+                    spaceID: id,
+                    spaceTitle: spaceData.title || '',
+                    createdAt: noteData.createdAt || '',
+                    updatedAt: noteData.updatedAt || ''
+                  } as Note;
+                })
+                : undefined;
+
+              return {
+                id: id,
+                title: spaceData.title || '',
+                description: spaceData.description || '',
+                color: spaceData.color || undefined,
+                notes: notesArray,
+                createdAt: spaceData.createdAt || '',
+                updatedAt: spaceData.updatedAt || undefined,
+              } as Space;
+
+            } else {
+              console.log(`No space found with ID ${id} for user ${uid}.`);
+              throw new Error(`Space not found with ID: ${id}`);
+            }
+          }),
+          catchError(error => {
+            console.error('Error fetching or mapping space data:', error);
+            return throwError(() => error);
+          })
+        );
+      }),
+      catchError(error => {
+        console.error('Error in getSpaceById pipeline:', error);
+        const message = error instanceof Error ? error.message : 'Failed to fetch space.';
+        return throwError(() => new Error(message));
       })
     );
   }

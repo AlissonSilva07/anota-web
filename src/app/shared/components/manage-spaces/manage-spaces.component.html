@@ -2,7 +2,7 @@
     <h3>Gerencie seus espaços</h3>
     <div class="vertical-align">
         @for (space of spaces(); track $index) {
-        <div class="space-item-card">
+        <button (click)="onNavigate(space.id)" class="space-item-card">
             <div class="description-group">
                 <div [ngStyle]="{
                     'width': '20px',
@@ -15,7 +15,7 @@
                 <p class="space-count">({{ space.notes?.length }})</p>
             </div>
             <i class="material-icons-outlined">chevron_right</i>
-        </div>
+        </button>
 
         <div class="divider" *ngIf="!$last"></div>
         } @empty {
