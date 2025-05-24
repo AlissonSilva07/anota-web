@@ -8,6 +8,7 @@ import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 })
 export class ModalLayoutComponent {
   @Input() title: string = '';
+  @Input() description: string = '';
   @Input() isOpen: boolean = false;
 
   @Output() closeRequest = new EventEmitter<void>();

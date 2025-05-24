@@ -17,7 +17,7 @@
 
     <div class="footer-actions">
       <button class="select-space-card" type="button" (click)="openModal()">
-        <p>Selecionar Espaço</p>
+        <p>{{ confirmedSpace() || "Selecionar Espaço" }}</p>
         <i class="material-icons-outlined chevron-icon">chevron_right</i>
       </button>
       <div class="actions-card">
@@ -33,7 +33,39 @@
 
   <app-modal-layout
     [title]="'Selecionar Espaço'"
+    [description]="'Selecione o espaço onde deseja salvar a nota:'"
     [isOpen]="isModalOpen()"
     (closeRequest)="closeModal()"
-  ></app-modal-layout>
+  >
+    <form [formGroup]="optionGroup">
+      @for (option of spaceOptions(); track option.id) {
+      <div class="radio-button-item">
+        <input
+          type="radio"
+          [id]="option.id"
+          name="space"
+          [value]="option.label"
+          formControlName="space"
+          class="radio-input"
+        />
+        <label [for]="option.id" class="radio-label">
+          <span class="custom-radio"></span>
+          {{ option.label }}
+        </label>
+      </div>
+
+      @if (!$last) {
+      <app-divider></app-divider>
+      } } @empty {
+      <p>Loading spaces...</p>
+      }
+    </form>
+    <app-custom-button
+      [type]="CustomButtonType.DEFAULT"
+      [disabled]="loading() || !optionGroup.get('space')?.value"
+      (click)="confirmSelection()"
+    >
+      Escolher Espaço
+    </app-custom-button>
+  </app-modal-layout>
 </div>

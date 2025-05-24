@@ -35,12 +35,6 @@
     color: var(--secondary-text-color);
 }
 
-.divider {
-    width: 100%;
-    height: 1px;
-    background-color: var(--stroke-color);
-}
-
 .vertical-align {
     display: flex;
     flex-direction: column;

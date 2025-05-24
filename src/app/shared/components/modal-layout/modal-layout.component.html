@@ -2,10 +2,13 @@
 <div class="modal-layout">
   <div class="modal-body">
     <div class="modal-header">
-      <h2>{{ title }}</h2>
-      <button class="close-button" type="button" (click)="requestClose()">
-        <i class="material-icons-outlined close-icon">close</i>
-      </button>
+      <div class="modal-header-content">
+        <h3>{{ title }}</h3>
+        <button class="close-button" type="button" (click)="requestClose()">
+          <i class="material-icons-outlined close-icon">close</i>
+        </button>
+      </div>
+      <p class="modal-description">{{ description }}</p>
     </div>
     <div class="modal-content">
       <ng-content></ng-content>

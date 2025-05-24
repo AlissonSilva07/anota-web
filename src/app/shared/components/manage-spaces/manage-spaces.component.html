@@ -1,27 +1,32 @@
 <div class="manage-spaces">
-    <h3>Gerencie seus espaços</h3>
-    <div class="vertical-align">
-        @for (space of spaces(); track $index) {
-        <button (click)="onNavigate(space.id)" class="space-item-card">
-            <div class="description-group">
-                <div [ngStyle]="{
+  <h3>Gerencie seus espaços</h3>
+  <div class="vertical-align">
+    @for (space of spaces(); track $index) {
+    <button (click)="onNavigate(space.id)" class="space-item-card">
+      <div class="description-group">
+        <div
+          [ngStyle]="{
                     'width': '20px',
                     'height': '20px',
                     'background-color': space.color,
                     'border-radius': '100%',
                     'border': '1px solid var(--stroke-color)',
-                }"></div>
-                <p class="space-title">{{ space.title }}</p>
-                <p class="space-count">({{ space.notes?.length }})</p>
-            </div>
-            <i class="material-icons-outlined chevron-icon">chevron_right</i>
-        </button>
+                }"
+        ></div>
+        <p class="space-title">{{ space.title }}</p>
+        <p class="space-count">({{ space.notes?.length }})</p>
+      </div>
+      <i class="material-icons-outlined chevron-icon">chevron_right</i>
+    </button>
 
-        <div class="divider" *ngIf="!$last"></div>
-        } @empty {
-        <p>Ainda não existem espaços no momento.</p>
-        }
+    @if (!$last) {
+        <app-divider></app-divider>
+    } 
 
-        <a class="link-style" href="/">Criar novo Espaço</a>
-    </div>
+    } @empty {
+    <p>Ainda não existem espaços no momento.</p>
+    }
+
+    <a class="link-style" href="/">Criar novo Espaço</a>
+  </div>
 </div>

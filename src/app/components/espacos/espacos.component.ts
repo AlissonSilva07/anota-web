@@ -28,7 +28,6 @@ export class EspacosComponent {
 
     this.spacesService.getSpaces().subscribe({
       next: (data) => {
-        console.log('Fetched spaces:', data);
         this.spaces.set(data);
         this.isLoading.set(false);
       },

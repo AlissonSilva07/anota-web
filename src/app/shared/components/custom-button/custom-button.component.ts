@@ -33,11 +33,11 @@ export class CustomButtonComponent {
   textColor = computed(() => {
     switch (this._type()) {
       case CustomButtonType.MUTED:
-        return '--primary-color';
+        return '--primary-text-color';
       case CustomButtonType.DISABLED:
-        return '--white-button-text';
+        return '--secondary-text-color';
       default:
-        return '--white-button-text';
+        return '--background-color';
     }
   });
 

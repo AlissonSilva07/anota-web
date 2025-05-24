@@ -10,7 +10,10 @@
     <i class="material-icons-outlined chevron-icon">chevron_right</i>
   </button>
 
-  <div class="divider" *ngIf="!$last"></div>
+  @if (!$last) {
+    <app-divider></app-divider>
+  }
+
   } @empty {
   <p>Ainda não existem notas no momento.</p>
   }
