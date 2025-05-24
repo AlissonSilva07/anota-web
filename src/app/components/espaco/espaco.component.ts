@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Space } from '../../models/space.model';
 import { SpacesService } from '../../services/spaces/spaces.service';
-import { Location } from '@angular/common'; // 1. Import Location
+import { CommonModule, Location } from '@angular/common'; // 1. Import Location
+import { NotesListComponent } from '../../shared/components/notes-list/notes-list.component';
 
 @Component({
   selector: 'app-espaco',
-  imports: [],
+  imports: [NotesListComponent, CommonModule],
   templateUrl: './espaco.component.html',
   styleUrl: './espaco.component.css'
 })

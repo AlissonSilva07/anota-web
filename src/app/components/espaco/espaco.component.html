@@ -1,9 +1,13 @@
 <div class="container">
     <div class="header">
         <i (click)="goBack()" class="material-icons-outlined icon-back">arrow_back</i>
-
-        <h2>Espaço</h2>
+        <div class="vertical-align">
+            <h2>{{ spaceDetails().title }}</h2>
+            <p class="espaco-description">{{ spaceDetails().description }}</p>
+        </div>
     </div>
     <div class="content">
+        <p>Todas as notas: {{ spaceDetails().notes?.length }}</p>  
+        <app-notes-list [notes]="spaceDetails().notes"></app-notes-list>
     </div>
 </div>

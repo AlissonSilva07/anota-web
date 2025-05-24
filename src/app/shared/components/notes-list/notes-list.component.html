@@ -1,0 +1,17 @@
+<div class="vertical-align">
+  @for (note of notes(); track $index) {
+  <button class="note-item-card">
+    <div class="note-item-card-content">
+      <div class="note-item-card-icon">
+        <i class="material-icons-outlined icon">edit</i>
+      </div>
+      <h4 class="note-item-title">{{ note.title }}</h4>
+    </div>
+    <i class="material-icons-outlined chevron-icon">chevron_right</i>
+  </button>
+
+  <div class="divider" *ngIf="!$last"></div>
+  } @empty {
+  <p>Ainda não existem notas no momento.</p>
+  }
+</div>

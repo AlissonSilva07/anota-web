@@ -9,6 +9,7 @@ import { LogoSvgComponent } from './components/logo-svg/logo-svg.component';
 import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
 import { ManageSpacesComponent } from './components/manage-spaces/manage-spaces.component';
 import { ThemeSwitcherButtonComponent } from './components/theme-switcher-button/theme-switcher-button.component';
+import { NotesListComponent } from './components/notes-list/notes-list.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { ThemeSwitcherButtonComponent } from './components/theme-switcher-button
     LogoSvgComponent,
     CustomToastComponent,
     ManageSpacesComponent,
-    ThemeSwitcherButtonComponent
+    ThemeSwitcherButtonComponent,
+    NotesListComponent
   ],
   exports: [
     CustomInputComponent,
@@ -32,7 +34,8 @@ import { ThemeSwitcherButtonComponent } from './components/theme-switcher-button
     LogoSvgComponent,
     CustomToastComponent,
     ManageSpacesComponent,
-    ThemeSwitcherButtonComponent
+    ThemeSwitcherButtonComponent,
+    NotesListComponent
   ]
 })
 export class SharedModule { }
