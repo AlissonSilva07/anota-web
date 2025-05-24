@@ -7,6 +7,7 @@ import { CustomImgPickerComponent } from './components/custom-img-picker/custom-
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LogoSvgComponent } from './components/logo-svg/logo-svg.component';
 import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
+import { ManageSpacesComponent } from './components/manage-spaces/manage-spaces.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { CustomToastComponent } from './components/custom-toast/custom-toast.com
     CustomImgPickerComponent,
     SidebarComponent,
     LogoSvgComponent,
-    CustomToastComponent
+    CustomToastComponent,
+    ManageSpacesComponent
   ],
   exports: [
     CustomInputComponent,
@@ -26,7 +28,8 @@ import { CustomToastComponent } from './components/custom-toast/custom-toast.com
     CustomImgPickerComponent,
     SidebarComponent,
     LogoSvgComponent,
-    CustomToastComponent
+    CustomToastComponent,
+    ManageSpacesComponent
   ]
 })
 export class SharedModule { }

@@ -4,10 +4,11 @@ import { UserData } from '../../models/user-data.model';
 import { CommonModule } from '@angular/common';
 import { Space } from '../../models/space.model';
 import { SpacesService } from '../../services/spaces/spaces.service';
+import { ManageSpacesComponent } from "../../shared/components/manage-spaces/manage-spaces.component";
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, ManageSpacesComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

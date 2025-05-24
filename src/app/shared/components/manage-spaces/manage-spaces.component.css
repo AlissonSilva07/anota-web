@@ -1,0 +1,58 @@
+.manage-spaces {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.space-item-card {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0rem;
+}
+
+.description-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.color-bullet {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.space-count {
+    color: var(--secondary-text-color);
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--stroke-color);
+}
+
+.vertical-align {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link-style {
+    text-decoration: underline;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.link-style:hover {
+    background-color: var(--stroke-color);
+    color: var(--primary-text-color);
+}
