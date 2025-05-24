@@ -1,18 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Space } from '../../models/space.model';
 import { SpacesService } from '../../services/spaces/spaces.service';
-import { CommonModule, Location } from '@angular/common'; // 1. Import Location
+import { BackButtonComponent } from "../../shared/components/back-button/back-button.component";
 import { NotesListComponent } from '../../shared/components/notes-list/notes-list.component';
+import { SharedModule } from "../../shared/shared.module";
 
 @Component({
-  selector: 'app-espaco',
-  imports: [NotesListComponent, CommonModule],
+  imports: [NotesListComponent, CommonModule, SharedModule, BackButtonComponent],
   templateUrl: './espaco.component.html',
   styleUrl: './espaco.component.css'
 })
 export class EspacoComponent {
-  private location = inject(Location)
   private route = inject(ActivatedRoute);
   private spacesService = inject(SpacesService)
   espacoId: string | null = null;
@@ -22,7 +22,7 @@ export class EspacoComponent {
   errorMessage = signal<string | null>(null);
 
   ngOnInit(): void {
-    this.espacoId = this.route.snapshot.params['id']; 
+    this.espacoId = this.route.snapshot.params['id'];
 
     if (this.espacoId) this.fetchSpaceById(this.espacoId);
   }
@@ -44,9 +44,5 @@ export class EspacoComponent {
         console.error('Erro ao buscar espaços', err);
       }
     });
-  }
-
-  goBack() {
-    this.location.back()
   }
 }

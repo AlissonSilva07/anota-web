@@ -34,22 +34,3 @@
     flex-direction: column;
     gap: 1rem;
 }
-
-.back-button {
-    padding: 0.5rem;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.icon-back {
-    padding: 0.5rem;
-    border-radius: 100%;
-    font-size: 1.5rem;
-    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
-.icon-back:hover {
-    background-color: var(--stroke-color);
-    color: var(--primary-text-color);
-}

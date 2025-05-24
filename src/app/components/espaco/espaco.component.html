@@ -1,13 +1,13 @@
 <div class="container">
-    <div class="header">
-        <i (click)="goBack()" class="material-icons-outlined icon-back">arrow_back</i>
-        <div class="vertical-align">
-            <h2>{{ spaceDetails().title }}</h2>
-            <p class="espaco-description">{{ spaceDetails().description }}</p>
-        </div>
+  <div class="header">
+    <app-back-button></app-back-button>
+    <div class="vertical-align">
+      <h2>{{ spaceDetails().title }}</h2>
+      <p class="espaco-description">{{ spaceDetails().description }}</p>
     </div>
-    <div class="content">
-        <p>Todas as notas: {{ spaceDetails().notes?.length }}</p>  
-        <app-notes-list [notes]="spaceDetails().notes"></app-notes-list>
-    </div>
+  </div>
+  <div class="content">
+    <p>Todas as notas: {{ spaceDetails().notes?.length }}</p>
+    <app-notes-list [notes]="spaceDetails().notes"></app-notes-list>
+  </div>
 </div>

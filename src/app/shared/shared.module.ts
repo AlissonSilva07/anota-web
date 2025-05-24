@@ -10,6 +10,7 @@ import { CustomToastComponent } from './components/custom-toast/custom-toast.com
 import { ManageSpacesComponent } from './components/manage-spaces/manage-spaces.component';
 import { ThemeSwitcherButtonComponent } from './components/theme-switcher-button/theme-switcher-button.component';
 import { NotesListComponent } from './components/notes-list/notes-list.component';
+import { BackButtonComponent } from './components/back-button/back-button.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { NotesListComponent } from './components/notes-list/notes-list.component
     CustomToastComponent,
     ManageSpacesComponent,
     ThemeSwitcherButtonComponent,
-    NotesListComponent
+    NotesListComponent,
+    BackButtonComponent
   ],
   exports: [
     CustomInputComponent,
@@ -35,7 +37,8 @@ import { NotesListComponent } from './components/notes-list/notes-list.component
     CustomToastComponent,
     ManageSpacesComponent,
     ThemeSwitcherButtonComponent,
-    NotesListComponent
+    NotesListComponent,
+    BackButtonComponent
   ]
 })
 export class SharedModule { }
