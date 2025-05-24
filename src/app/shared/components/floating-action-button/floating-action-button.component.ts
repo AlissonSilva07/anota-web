@@ -13,9 +13,7 @@ export class FloatingActionButtonComponent {
   @Input() link: string | null = null
 
   navigate() {
-    if (!this.link) return;
-
+    if (!this.link) return;    
     this.router.navigateByUrl(this.link);
   }
-
 }

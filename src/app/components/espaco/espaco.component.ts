@@ -34,7 +34,6 @@ export class EspacoComponent {
 
     this.spacesService.getSpaceById(id).subscribe({
       next: (data) => {
-        console.log('Fetched space:', data);
         this.spaceDetails.set(data);
         this.isLoading.set(false);
       },

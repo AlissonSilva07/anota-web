@@ -1,0 +1,33 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="saveNote()" class="container">
+    <input
+      type="text"
+      placeholder="Título da Nota"
+      class="note-title"
+      formControlName="title"
+      [ngClass]="{ 'shake input-error': title?.invalid && title?.touched }"
+    />
+
+    <textarea
+      placeholder="Corpo da Nota"
+      class="note-content"
+      formControlName="content"
+      [ngClass]="{ 'shake input-error': content?.invalid && content?.touched }"
+    ></textarea>
+
+    <div class="footer-actions">
+      <div class="select-space-card">
+        <p>Selecionar Espaço</p>
+        <i class="material-icons-outlined chevron-icon">chevron_right</i>
+      </div>
+      <div class="actions-card">
+        <button class="actions-button" type="submit">
+          <i class="material-icons-outlined action-icon">save</i>
+        </button>
+        <button class="actions-button" type="button">
+          <i class="material-icons-outlined action-icon">close</i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

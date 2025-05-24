@@ -1,0 +1,106 @@
+.container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.note-title {
+  width: 100%;
+  font-size: 1.5rem;
+  color: var(--primary-text-color);
+}
+
+.note-content {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--primary-text-color);
+  resize: none;
+}
+
+.shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.input-error::placeholder {
+  color: red;
+  opacity: 1;
+}
+
+.footer-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.select-space-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--background-color);
+  border-radius: 4rem;
+  padding: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--stroke-color);
+}
+
+.chevron-icon {
+  color: var(--primary-color);
+}
+
+.actions-card {
+  width: 20rem;
+  max-width: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--primary-color);
+  border-radius: 4rem;
+  padding: 1rem;
+  cursor: pointer;
+  color: var(--primary-text-color);
+  border: 1px solid var(--primary-color);
+}
+
+.actions-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0rem;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  cursor: pointer;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

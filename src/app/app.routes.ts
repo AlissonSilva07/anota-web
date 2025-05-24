@@ -8,6 +8,7 @@ import { authGuard } from './guards/auth.guard';
 import { EspacosComponent } from './components/espacos/espacos.component';
 import { SearchComponent } from './components/search/search.component';
 import { EspacoComponent } from './components/espaco/espaco.component';
+import { NewNoteComponent } from './components/new-note/new-note.component';
 
 export const routes: Routes = [
     {
@@ -44,6 +45,10 @@ export const routes: Routes = [
             {
                 path: 'espacos/:id',
                 component: EspacoComponent 
+            },
+            {
+                path: 'new-note',
+                component: NewNoteComponent
             },
             {
                 path: 'pesquisar',
