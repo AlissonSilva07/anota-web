@@ -26,7 +26,6 @@ export class NewNoteComponent {
   private spaceService = inject(SpacesService);
   fb: FormBuilder = inject(FormBuilder);
   private toastService = inject(ToastService);
-  loading = signal(false);
 
   CustomButtonType = CustomButtonType;
 

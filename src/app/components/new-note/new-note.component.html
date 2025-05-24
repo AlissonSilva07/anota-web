@@ -62,7 +62,7 @@
     </form>
     <app-custom-button
       [type]="CustomButtonType.DEFAULT"
-      [disabled]="loading() || !optionGroup.get('space')?.value"
+      [disabled]="false"
       (click)="confirmSelection()"
     >
       Escolher Espaço
