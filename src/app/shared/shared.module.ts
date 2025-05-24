@@ -12,7 +12,6 @@ import { ThemeSwitcherButtonComponent } from './components/theme-switcher-button
 import { NotesListComponent } from './components/notes-list/notes-list.component';
 import { BackButtonComponent } from './components/back-button/back-button.component';
 import { ModalLayoutComponent } from './components/modal-layout/modal-layout.component';
-import { DividerComponent } from './components/divider/divider.component';
 
 @NgModule({
   imports: [
@@ -30,7 +29,6 @@ import { DividerComponent } from './components/divider/divider.component';
     NotesListComponent,
     BackButtonComponent,
     ModalLayoutComponent,
-    DividerComponent
   ],
   exports: [
     CustomInputComponent,
@@ -44,7 +42,6 @@ import { DividerComponent } from './components/divider/divider.component';
     NotesListComponent,
     BackButtonComponent,
     ModalLayoutComponent,
-    DividerComponent
   ]
 })
 export class SharedModule { }

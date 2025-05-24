@@ -35,7 +35,7 @@ export class CustomButtonComponent {
       case CustomButtonType.MUTED:
         return '--primary-text-color';
       case CustomButtonType.DISABLED:
-        return '--secondary-text-color';
+        return '--background-color';
       default:
         return '--background-color';
     }

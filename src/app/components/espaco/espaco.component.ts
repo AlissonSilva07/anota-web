@@ -5,10 +5,9 @@ import { Space } from '../../models/space.model';
 import { SpacesService } from '../../services/spaces/spaces.service';
 import { BackButtonComponent } from "../../shared/components/back-button/back-button.component";
 import { NotesListComponent } from '../../shared/components/notes-list/notes-list.component';
-import { SharedModule } from "../../shared/shared.module";
 
 @Component({
-  imports: [NotesListComponent, CommonModule, SharedModule, BackButtonComponent],
+  imports: [NotesListComponent, CommonModule, BackButtonComponent],
   templateUrl: './espaco.component.html',
   styleUrl: './espaco.component.css'
 })
