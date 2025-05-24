@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { Space } from '../../models/space.model';
 import { SpacesService } from '../../services/spaces/spaces.service';
 import { ManageSpacesComponent } from "../../shared/components/manage-spaces/manage-spaces.component";
+import { FloatingActionButtonComponent } from "../../shared/components/floating-action-button/floating-action-button.component";
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, ManageSpacesComponent],
+  imports: [CommonModule, ManageSpacesComponent, FloatingActionButtonComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
