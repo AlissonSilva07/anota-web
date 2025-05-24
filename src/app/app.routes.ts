@@ -47,7 +47,7 @@ export const routes: Routes = [
                 component: EspacoComponent 
             },
             {
-                path: 'new-note',
+                path: 'nova-nota',
                 component: NewNoteComponent
             },
             {

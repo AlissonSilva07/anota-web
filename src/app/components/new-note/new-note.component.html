@@ -54,9 +54,9 @@
         </label>
       </div>
 
-      @if (!$last) {
-      <app-divider></app-divider>
-      } } @empty {
+      <div class="divider" *ngIf="!$last"></div>
+      
+      } @empty {
       <p>Loading spaces...</p>
       }
     </form>

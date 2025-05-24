@@ -118,6 +118,12 @@ label {
   align-items: center;
 }
 
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--stroke-color);
+}
+
 @keyframes shake {
   10%,
   90% {
