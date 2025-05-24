@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
+import { ThemeService } from '../../../services/theme/theme.service';
 
 @Component({
   selector: 'app-logo-svg',
@@ -8,5 +9,12 @@ import { Component } from '@angular/core';
   styleUrl: './logo-svg.component.css'
 })
 export class LogoSvgComponent {
-  fillColor = '#1C1C1C';
+  themeService = inject(ThemeService);
+  currentTheme = this.themeService.currentTheme;
+
+  fillColor = computed(() => {
+    const theme = this.currentTheme();
+    return theme === 'dark' ? '#FAFAFA' : '#1C1C1C';
+  });
+
 }

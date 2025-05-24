@@ -21,6 +21,10 @@
     gap: 1rem;
 }
 
+.space-title {
+    color: var(--primary-text-color);
+}
+
 .color-bullet {
     width: 20px;
     height: 20px;

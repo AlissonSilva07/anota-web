@@ -1,0 +1,17 @@
+.theme-switcher-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: var(--secondary-text-color);
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.theme-switcher-button:hover {
+  background-color: var(--stroke-color);
+  color: var(--primary-text-color);
+}

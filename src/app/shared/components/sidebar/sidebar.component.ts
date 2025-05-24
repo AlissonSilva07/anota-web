@@ -3,6 +3,7 @@ import { LogoSvgComponent } from "../logo-svg/logo-svg.component";
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { AuthService } from '../../../services/auth/auth.service';
+import { ThemeSwitcherButtonComponent } from '../theme-switcher-button/theme-switcher-button.component';
 
 interface NavTreeItem {
   id: number;
@@ -13,7 +14,7 @@ interface NavTreeItem {
 
 @Component({
   selector: 'app-sidebar',
-  imports: [LogoSvgComponent],
+  imports: [LogoSvgComponent, ThemeSwitcherButtonComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })

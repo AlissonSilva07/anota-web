@@ -99,8 +99,13 @@
     color: var(--white-button-text);
 }
 
+.note-description {
+    color: var(--secondary-text-color);
+}
+
 .icon {
     font-size: 3rem;
+    color: var(--background-color);
 }
 
 @keyframes spin {

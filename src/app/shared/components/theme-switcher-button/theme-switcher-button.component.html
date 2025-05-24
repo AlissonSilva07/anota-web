@@ -1,0 +1,13 @@
+<button
+  class="theme-switcher-button"
+  (click)="toggleTheme()"
+  [attr.aria-label]="
+    'Mudar para tema ' + (currentTheme() === 'dark' ? 'claro' : 'escuro')
+  "
+>
+  @if (currentTheme() === 'dark') {
+  <i class="material-icons-outlined bottom-button-icon"> light_mode </i>
+  } @else {
+  <i class="material-icons-outlined bottom-button-icon"> dark_mode </i>
+  }
+</button>
