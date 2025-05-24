@@ -1,14 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../services/toast/toast.service';
+import { ModalLayoutComponent } from '../../shared/components/modal-layout/modal-layout.component';
 
 @Component({
   selector: 'app-new-note',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    ModalLayoutComponent
   ],
   templateUrl: './new-note.component.html',
   styleUrl: './new-note.component.css'
@@ -37,5 +39,15 @@ export class NewNoteComponent {
 
       return;
     }
+  }
+
+  isModalOpen = signal(false);
+
+  openModal() {
+    this.isModalOpen.set(true);
+  }
+
+  closeModal() {
+    this.isModalOpen.set(false);
   }
 }

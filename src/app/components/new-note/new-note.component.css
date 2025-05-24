@@ -49,6 +49,7 @@
   justify-content: center;
   gap: 0.5rem;
   background-color: var(--background-color);
+  color: var(--primary-text-color);
   border-radius: 4rem;
   padding: 1rem;
   cursor: pointer;

@@ -11,6 +11,7 @@ import { ManageSpacesComponent } from './components/manage-spaces/manage-spaces.
 import { ThemeSwitcherButtonComponent } from './components/theme-switcher-button/theme-switcher-button.component';
 import { NotesListComponent } from './components/notes-list/notes-list.component';
 import { BackButtonComponent } from './components/back-button/back-button.component';
+import { ModalLayoutComponent } from './components/modal-layout/modal-layout.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { BackButtonComponent } from './components/back-button/back-button.compon
     ManageSpacesComponent,
     ThemeSwitcherButtonComponent,
     NotesListComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    ModalLayoutComponent
   ],
   exports: [
     CustomInputComponent,
@@ -38,7 +40,8 @@ import { BackButtonComponent } from './components/back-button/back-button.compon
     ManageSpacesComponent,
     ThemeSwitcherButtonComponent,
     NotesListComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    ModalLayoutComponent
   ]
 })
 export class SharedModule { }

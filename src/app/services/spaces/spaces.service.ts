@@ -5,6 +5,7 @@ import { from, Observable, throwError } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { Space } from '../../models/space.model'; // Ensure Note is imported if your Space model uses it
 import { Note } from '../../models/note.model';
+import { NoteLabel } from '../../models/note-label.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,6 @@ export class SpacesService {
 
         const uid = currentUser.uid;
 
-        // Reference to the user's 'spaces' sub-collection
         const spacesRef = ref(this.db, `users/${uid}/spaces`);
 
         return from(get(spacesRef)).pipe(
@@ -148,6 +148,59 @@ export class SpacesService {
         console.error('Error in getSpaceById pipeline:', error);
         const message = error instanceof Error ? error.message : 'Failed to fetch space.';
         return throwError(() => new Error(message));
+      })
+    );
+  }
+
+  getAllSpaceLabels(): Observable<NoteLabel[]> {
+    return user(this.firebaseAuth).pipe(
+      take(1),
+      switchMap((currentUser: User | null) => {
+        if (!currentUser?.uid) {
+          return throwError(() => new Error('Usuário não autenticado.'));
+        }
+
+        const uid = currentUser.uid;
+        const spacesRef = ref(this.db, `users/${uid}/spaces`);
+
+        return from(get(spacesRef)).pipe(
+          map((snapshot: DataSnapshot) => {
+            if (!snapshot.exists()) {
+              return [];
+            }
+
+            const rawSpacesObject = snapshot.val();
+            if (!rawSpacesObject) {
+              return [];
+            }
+
+            const labels: NoteLabel[] = Object.keys(rawSpacesObject)
+              .map(spaceId => {
+                const spaceData = rawSpacesObject[spaceId];
+                const title = spaceData?.title;
+
+                if (!spaceId || !title) {
+                  return null;
+                }
+
+                return {
+                  id: spaceId,
+                  label: title
+                } as NoteLabel;
+              })
+              .filter(label => label !== null) as NoteLabel[];
+
+            return labels;
+          }),
+          catchError(error => {
+            console.error('Erro ao buscar ou mapear os labels dos espaços:', error);
+            return throwError(() => new Error(`Erro ao buscar espaços: ${error.message || error}`));
+          })
+        );
+      }),
+      catchError(error => {
+        console.error('Erro no pipeline de getAllSpaceLabels:', error);
+        return throwError(() => error);
       })
     );
   }
