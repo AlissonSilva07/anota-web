@@ -44,14 +44,14 @@ export const routes: Routes = [
             },
             {
                 path: 'espacos/:id',
-                component: EspacoComponent 
+                component: EspacoComponent
             },
             {
-                path: 'nova-nota',
+                path: 'espacos/:spaceId/nota/:noteId',
                 component: NoteComponent
             },
             {
-                path: 'nota/:id',
+                path: 'nova-nota',
                 component: NoteComponent
             },
             {

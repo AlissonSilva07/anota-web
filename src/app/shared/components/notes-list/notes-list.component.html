@@ -1,6 +1,6 @@
 <div class="vertical-align">
   @for (note of notes(); track $index) {
-  <button class="note-item-card">
+  <button class="note-item-card" (click)="onNavigate(note.spaceID, note.id!)">
     <div class="note-item-card-content">
       <div class="note-item-card-icon">
         <i class="material-icons-outlined icon">edit</i>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Note } from '../../../models/note.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notes-list',
@@ -9,5 +10,13 @@ import { Note } from '../../../models/note.model';
   styleUrl: './notes-list.component.css'
 })
 export class NotesListComponent {
+  private router = inject(Router)
   notes = input<Note[] | undefined>([])
+
+  onNavigate(spaceId: string, noteId: string) {
+    if (!spaceId) return;
+    if (!noteId) return;
+
+    this.router.navigateByUrl(`/main/espacos/${spaceId}/nota/${noteId}`)
+  }
 }

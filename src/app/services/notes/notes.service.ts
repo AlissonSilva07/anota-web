@@ -5,6 +5,8 @@ import { from, Observable, throwError } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { Note } from '../../models/note.model';
 
+export type UpdateNotePayload = Pick<Note, 'title' | 'content' | 'updatedAt'>;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,7 +42,7 @@ export class NotesService {
                     spaceTitle: noteData.spaceTitle || '',
                     createdAt: noteData.createdAt || '',
                     updatedAt: noteData.updatedAt || ''
-                  } as Note; // Cast to Note interface
+                  } as Note;
                 });
                 return notesArray;
               } else {
@@ -81,7 +83,7 @@ export class NotesService {
     let uid: string;
     let spaceTitle: string;
     let noteId: string;
-  
+
     return user(this.firebaseAuth).pipe(
       take(1),
       switchMap((currentUser: User | null) => {
@@ -101,15 +103,15 @@ export class NotesService {
         if (!spaceTitle) {
           return throwError(() => new Error('Título do espaço não encontrado.'));
         }
-  
+
         const notesRef = ref(this.db, `users/${uid}/spaces/${note.spaceID}/notes`);
         const newNoteRef = push(notesRef);
         noteId = newNoteRef.key || '';
-  
+
         if (!noteId) {
           return throwError(() => new Error('Falha ao gerar ID da nota.'));
         }
-  
+
         const noteMap = {
           id: noteId,
           title: note.title,
@@ -119,17 +121,88 @@ export class NotesService {
           createdAt: note.createdAt,
           updatedAt: note.updatedAt
         };
-  
+
         const updates: { [key: string]: any } = {};
         updates[`/users/${uid}/spaces/${note.spaceID}/notes/${noteId}`] = noteMap;
         updates[`/users/${uid}/noteHistory/${noteId}`] = noteMap;
-  
+
         return from(update(ref(this.db), updates));
       }),
       map(() => noteId),
       catchError(error => {
         console.error('Erro ao salvar a nota:', error);
         return throwError(() => error instanceof Error ? error : new Error('Falha ao salvar a nota. ' + (error?.message || '')));
+      })
+    );
+  }
+
+  getNoteById(spaceId: string, noteId: string): Observable<Note> {
+    if (!spaceId) {
+      return throwError(() => new Error('Space ID must be provided.'));
+    }
+
+    if (!noteId) {
+      return throwError(() => new Error('Note ID must be provided.'));
+    }
+
+    return user(this.firebaseAuth).pipe(
+      take(1),
+      switchMap((currentUser: User | null) => {
+        if (!currentUser?.uid) {
+          return throwError(() => new Error('No authenticated user found.'));
+        }
+
+        const uid = currentUser.uid;
+        const spaceRef = ref(this.db, `users/${uid}/spaces/${spaceId}/notes/${noteId}`);
+
+        return from(get(spaceRef)).pipe(
+          map((snapshot: DataSnapshot) => {
+            if (snapshot.exists()) {
+              const noteData = snapshot.val();
+
+              return noteData
+
+            } else {
+              console.log(`No space found with ID ${spaceId} for user ${uid}.`);
+              throw new Error(`Space not found with ID: ${spaceId}`);
+            }
+          }),
+          catchError(error => {
+            console.error('Error fetching or mapping space data:', error);
+            return throwError(() => error);
+          })
+        );
+      }),
+      catchError(error => {
+        console.error('Error in getSpaceById pipeline:', error);
+        const message = error instanceof Error ? error.message : 'Failed to fetch space.';
+        return throwError(() => new Error(message));
+      })
+    );
+  }
+
+  editNoteById(spaceId: string, noteId: string, updatedData: UpdateNotePayload): Observable<void> {
+    return user(this.firebaseAuth).pipe(
+      take(1),
+      switchMap((currentUser: User | null) => {
+        if (!currentUser || !currentUser.uid) {
+          return throwError(() => new Error('Usuário não autenticado.'));
+        }
+        const uid = currentUser.uid;
+        const noteRef = ref(this.db, `users/${uid}/spaces/${spaceId}/notes/${noteId}`);
+
+        return from(get(noteRef)).pipe(
+          switchMap(snapshot => {
+            if (!snapshot.exists()) {
+              return throwError(() => new Error('Nota não encontrada.'));
+            }
+            return from(update(noteRef, updatedData));
+          })
+        );
+      }),
+      catchError(error => {
+        console.error('Erro ao editar a nota:', error);
+        return throwError(() => error instanceof Error ? error : new Error('Falha ao editar a nota. ' + (error?.message || '')));
       })
     );
   }

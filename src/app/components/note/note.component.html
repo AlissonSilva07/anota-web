@@ -1,19 +1,10 @@
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="saveNote()" class="container">
-    <input
-      type="text"
-      placeholder="Título da Nota"
-      class="note-title"
-      formControlName="title"
-      [ngClass]="{ 'shake input-error': title?.invalid && title?.touched }"
-    />
+    <input type="text" placeholder="Título da Nota" class="note-title" formControlName="title"
+      [ngClass]="{ 'shake input-error': title?.invalid && title?.touched }" />
 
-    <textarea
-      placeholder="Corpo da Nota"
-      class="note-content"
-      formControlName="content"
-      [ngClass]="{ 'shake input-error': content?.invalid && content?.touched }"
-    ></textarea>
+    <textarea placeholder="Corpo da Nota" class="note-content" formControlName="content"
+      [ngClass]="{ 'shake input-error': content?.invalid && content?.touched }"></textarea>
 
     <div class="footer-actions">
       <button class="select-space-card" type="button" (click)="openModal()">
@@ -24,29 +15,25 @@
         <button class="actions-button" type="submit">
           <i class="material-icons-outlined action-icon">save</i>
         </button>
-        <button class="actions-button" type="button">
+        @if (isEditMode()) {
+        <button class="actions-button" type="submit">
+          <i class="material-icons-outlined action-icon">delete</i>
+        </button>
+        }
+        <button class="actions-button" type="button" (click)="goBack()">
           <i class="material-icons-outlined action-icon">close</i>
         </button>
       </div>
     </div>
   </form>
 
-  <app-modal-layout
-    [title]="'Selecionar Espaço'"
-    [description]="'Selecione o espaço onde deseja salvar a nota:'"
-    [isOpen]="isModalOpen()"
-    (closeRequest)="closeModal()"
-  >
+  <app-modal-layout [title]="'Selecionar Espaço'" [description]="'Selecione o espaço onde deseja salvar a nota:'"
+    [isOpen]="isModalOpen()" (closeRequest)="closeModal()">
     <form [formGroup]="optionGroup">
       @for (option of spaceOptions(); track option.id) {
       <div class="radio-button-item">
-        <input
-          type="radio"
-          [id]="option.id"
-          name="space"
-          [value]="option.id" formControlName="space"
-          class="radio-input"
-        />
+        <input type="radio" [id]="option.id" name="space" [value]="option.id" formControlName="space"
+          class="radio-input" />
         <label [for]="option.id" class="radio-label">
           <span class="custom-radio"></span>
           {{ option.label }}
@@ -54,21 +41,18 @@
       </div>
 
       @if (!$last) {
-        <div class="divider"></div>
+      <div class="divider"></div>
       }
 
       } @empty {
-        @if (!spaceOptions()) {
-            <p>Carregando espaços...</p>
-        } @else {
-            <p>Nenhum espaço encontrado. Crie um espaço primeiro.</p>
-        }
+      @if (!spaceOptions()) {
+      <p>Carregando espaços...</p>
+      } @else {
+      <p>Nenhum espaço encontrado. Crie um espaço primeiro.</p>
+      }
       }
     </form>
-    <app-custom-button
-      [type]="CustomButtonType.DEFAULT"
-      [disabled]="false" (click)="confirmSelection()"
-    >
+    <app-custom-button [type]="CustomButtonType.DEFAULT" [disabled]="false" (click)="confirmSelection()">
       Escolher Espaço
     </app-custom-button>
   </app-modal-layout>
