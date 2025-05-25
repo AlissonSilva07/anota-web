@@ -1,4 +1,4 @@
-import { Component, inject, Signal, signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, Signal, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../services/toast/toast.service';
@@ -9,6 +9,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { SharedModule } from "../../shared/shared.module";
 import { CustomButtonComponent } from "../../shared/components/custom-button/custom-button.component";
 import { CustomButtonType } from '../../shared/components/custom-button/custom-buttom.enum';
+import { NotesService } from '../../services/notes/notes.service';
+import { Note } from '../../models/note.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-note',
@@ -24,8 +27,13 @@ import { CustomButtonType } from '../../shared/components/custom-button/custom-b
 })
 export class NewNoteComponent {
   private spaceService = inject(SpacesService);
+  private noteService = inject(NotesService)
+  private router = inject(Router)
   fb: FormBuilder = inject(FormBuilder);
   private toastService = inject(ToastService);
+  response = signal<string>("")
+  isLoading = signal<boolean>(true);
+  errorMessage = signal<string | null>(null);
 
   CustomButtonType = CustomButtonType;
 
@@ -50,22 +58,28 @@ export class NewNoteComponent {
     space: ['']
   });
 
-  confirmedSpace: WritableSignal<string | null> = signal(null);
+  confirmedSpaceId: WritableSignal<string | null> = signal(null);
+
+  confirmedSpaceLabel: Signal<string | null> = computed(() => {
+    const id = this.confirmedSpaceId();
+    if (!id) return null;
+    return this.spaceOptions()?.find(opt => opt.id === id)?.label || null;
+  });
 
   confirmSelection() {
-    const currentSelection = this.optionGroup.controls.space.value;
+    const currentSelectionId = this.optionGroup.controls.space.value;
 
-    if (!currentSelection) {
+    if (!currentSelectionId) {
       this.toastService.warning('Por favor, selecione um espaço.', 2000);
       return;
     }
 
-    this.confirmedSpace.set(currentSelection);
+    this.confirmedSpaceId.set(currentSelectionId);
     this.closeModal();
   }
 
   saveNote() {
-    const selectedSpaceId = this.confirmedSpace();
+    const selectedSpaceId = this.confirmedSpaceId();
 
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -78,12 +92,41 @@ export class NewNoteComponent {
       this.openModal();
       return;
     }
+
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
+    const payload: Note = {
+      title: this.form.value.title || '',
+      content: this.form.value.content || '',
+      spaceTitle: this.confirmedSpaceLabel() || '',
+      spaceID: selectedSpaceId,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    this.noteService.saveNote(payload).subscribe({
+      next: (newNoteId) => {
+        this.response.set(newNoteId);
+        this.isLoading.set(false);
+        this.toastService.success('Nota salva com sucesso!', 2000);
+        this.form.reset();
+        this.confirmedSpaceId.set(null);
+        this.router.navigateByUrl(`/main/espacos/${selectedSpaceId}`)
+      },
+      error: (err: Error) => {
+        this.errorMessage.set(err.message || 'Erro ao salvar nota.');
+        this.isLoading.set(false);
+        this.toastService.error('Falha ao salvar a nota.', 3000);
+        console.error('Erro ao salvar nota', err);
+      }
+    });
   }
 
   isModalOpen = signal(false);
 
   openModal() {
-    this.optionGroup.controls.space.setValue(this.confirmedSpace());
+    this.optionGroup.controls.space.setValue(this.confirmedSpaceId());
     this.isModalOpen.set(true);
   }
 

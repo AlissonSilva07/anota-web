@@ -17,7 +17,7 @@
 
     <div class="footer-actions">
       <button class="select-space-card" type="button" (click)="openModal()">
-        <p>{{ confirmedSpace() || "Selecionar Espaço" }}</p>
+        <p>{{ confirmedSpaceLabel() || "Selecionar Espaço" }}</p>
         <i class="material-icons-outlined chevron-icon">chevron_right</i>
       </button>
       <div class="actions-card">
@@ -44,8 +44,7 @@
           type="radio"
           [id]="option.id"
           name="space"
-          [value]="option.label"
-          formControlName="space"
+          [value]="option.id" formControlName="space"
           class="radio-input"
         />
         <label [for]="option.id" class="radio-label">
@@ -54,16 +53,21 @@
         </label>
       </div>
 
-      <div class="divider" *ngIf="!$last"></div>
-      
+      @if (!$last) {
+        <div class="divider"></div>
+      }
+
       } @empty {
-      <p>Loading spaces...</p>
+        @if (!spaceOptions()) {
+            <p>Carregando espaços...</p>
+        } @else {
+            <p>Nenhum espaço encontrado. Crie um espaço primeiro.</p>
+        }
       }
     </form>
     <app-custom-button
       [type]="CustomButtonType.DEFAULT"
-      [disabled]="false"
-      (click)="confirmSelection()"
+      [disabled]="false" (click)="confirmSelection()"
     >
       Escolher Espaço
     </app-custom-button>
