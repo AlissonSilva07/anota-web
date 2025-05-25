@@ -8,7 +8,7 @@ import { authGuard } from './guards/auth.guard';
 import { EspacosComponent } from './components/espacos/espacos.component';
 import { SearchComponent } from './components/search/search.component';
 import { EspacoComponent } from './components/espaco/espaco.component';
-import { NewNoteComponent } from './components/new-note/new-note.component';
+import { NoteComponent } from './components/note/note.component';
 
 export const routes: Routes = [
     {
@@ -48,7 +48,11 @@ export const routes: Routes = [
             },
             {
                 path: 'nova-nota',
-                component: NewNoteComponent
+                component: NoteComponent
+            },
+            {
+                path: 'nota/:id',
+                component: NoteComponent
             },
             {
                 path: 'pesquisar',

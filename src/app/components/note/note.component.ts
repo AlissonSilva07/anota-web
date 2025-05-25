@@ -22,10 +22,10 @@ import { Router } from '@angular/router';
     SharedModule,
     CustomButtonComponent
   ],
-  templateUrl: './new-note.component.html',
-  styleUrl: './new-note.component.css'
+  templateUrl: './note.component.html',
+  styleUrl: './note.component.css'
 })
-export class NewNoteComponent {
+export class NoteComponent {
   private spaceService = inject(SpacesService);
   private noteService = inject(NotesService)
   private router = inject(Router)
