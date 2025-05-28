@@ -5,4 +5,32 @@
     <div class="content">
         <app-manage-spaces [spaces]="spaces()"></app-manage-spaces>
     </div>
+
+    <div class="footer-actions">
+        <button class="actions-card" (click)="openModal()">
+            <p>Criar novo espaço</p>
+        </button>
+    </div>
+
+    <app-modal-layout [title]="'Criar Novo Espaço'" [description]="'Insira os detalhes para criar um novo espaço:'"
+        [isOpen]="isModalOpen()" (closeRequest)="closeModal()">
+        <form [formGroup]="form">
+            <div class="form-area">
+                <app-custom-input placeholder="Título" [type]="CustomInputType.DEFAULT"
+                    [value]="form.controls.title.value" (valueChange)="form.controls.title.setValue($event)"
+                    [hasError]="form.controls.title.invalid && (form.controls.title.dirty || form.controls.title.touched)"></app-custom-input>
+                <app-custom-input placeholder="Descrição" [type]="CustomInputType.DEFAULT"
+                    [value]="form.controls.description.value" (valueChange)="form.controls.description.setValue($event)"
+                    [hasError]="form.controls.description.invalid && (form.controls.description.dirty || form.controls.description.touched)"></app-custom-input>
+                <div class="color-picker">
+                    <label for="favcolor">Cor:</label>
+                    <input type="color" id="favcolor" name="favcolor" value="#ff0000" class="picker" formControlName="color">
+                    <p class="color-picker-description">Clique para alterar</p>
+                </div>
+            </div>
+        </form>
+        <app-custom-button [type]="CustomButtonType.DEFAULT" [disabled]="false" (click)="onSubmit()">
+            Salvar
+        </app-custom-button>
+    </app-modal-layout>
 </div>
