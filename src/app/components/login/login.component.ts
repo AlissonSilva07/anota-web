@@ -1,4 +1,4 @@
-import { Component, inject, signal, ViewChild } from '@angular/core';
+import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { CustomInputComponent } from "../../shared/components/custom-input/custom-input.component";
 import { CustomInputType } from '../../shared/components/custom-input/input-type.enum';
 import { SharedModule } from "../../shared/shared.module";
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { ToastService } from '../../services/toast/toast.service';
+import { ThemeService } from '../../services/theme/theme.service';
 
 @Component({
   selector: 'app-login',
@@ -18,10 +19,18 @@ import { ToastService } from '../../services/toast/toast.service';
 export class LoginComponent {
   private router = inject(Router);
   private toastService = inject(ToastService);
+  private themeService = inject(ThemeService)
+
   error: boolean = false;
   fb: FormBuilder = inject(FormBuilder);
   authService: AuthService = inject(AuthService);
   loading = signal(false);
+  currentTheme = this.themeService.currentTheme;
+
+  logoImg = computed(() => {
+    const logo = this.currentTheme();
+    return logo === 'dark' ? 'logo-dark.png' : 'logo-light.png';
+  });
 
   @ViewChild('emailInput') emailInputRef!: CustomInputComponent;
   @ViewChild('passwordInput') passwordInputRef!: CustomInputComponent;

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="content">
-        <img src="logo-light.png" alt="Logo" class="logo" />
+        <img [src]="logoImg()" alt="Logo" class="logo" />
         <h2 class="title">Boas-vindas ao Anota!</h2>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="input-area">

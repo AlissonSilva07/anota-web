@@ -1,7 +1,7 @@
 <div class="wrapper" [class.input-error]="hasError">
     <input #inputElement [type]="inputType()" [placeholder]="placeholder" class="custom-input" [value]="value" (input)="onInputChange($event)" />
     <button *ngIf="showToggleIcon()" type="button" (click)="togglePasswordVisibility()" class="eye-button">
-        <i [ngClass]="isPasswordVisible() ? 'material-icons' : 'material-icons-outlined'">
+        <i [ngClass]="isPasswordVisible() ? 'material-icons eye-icon' : 'material-icons-outlined eye-icon'">
             remove_red_eye
         </i>
     </button>
