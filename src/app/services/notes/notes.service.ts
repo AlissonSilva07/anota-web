@@ -136,6 +136,15 @@ export class NotesService {
     );
   }
 
+  saveLastReadNote(note: Note) {
+    if (!note) return;
+
+    const storageKey = 'last-read-note';
+    const lastReadNote = JSON.stringify(note);
+
+    localStorage.setItem(storageKey, lastReadNote);
+  }
+
   getNoteById(spaceId: string, noteId: string): Observable<Note> {
     if (!spaceId) {
       return throwError(() => new Error('Space ID must be provided.'));

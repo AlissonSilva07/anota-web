@@ -6,10 +6,12 @@ import { Space } from '../../models/space.model';
 import { SpacesService } from '../../services/spaces/spaces.service';
 import { ManageSpacesComponent } from "../../shared/components/manage-spaces/manage-spaces.component";
 import { FloatingActionButtonComponent } from "../../shared/components/floating-action-button/floating-action-button.component";
+import { Note } from '../../models/note.model';
+import { LastReadNoteComponent } from '../../shared/components/last-read-note/last-read-note.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, ManageSpacesComponent, FloatingActionButtonComponent],
+  imports: [CommonModule, LastReadNoteComponent, ManageSpacesComponent, FloatingActionButtonComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -22,9 +24,11 @@ export class HomeComponent implements OnInit {
   errorMessage = signal<string | null>(null);
 
   spaces = signal<Space[]>([]);
+  lastReadNote = signal<Note>({} as Note)
 
   ngOnInit(): void {
     this.fetchUserData();
+    this.fetchLastReadNote();
     this.fetchSpaces();
   }
 
@@ -44,6 +48,21 @@ export class HomeComponent implements OnInit {
         console.error('Error fetching user data in component:', err);
       }
     });
+  }
+
+  fetchLastReadNote() {
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
+    const localStorageNote = localStorage.getItem('last-read-note')
+    if (localStorageNote) {
+      const parsedNote: Note = JSON.parse(localStorageNote)
+      this.lastReadNote.set(parsedNote)
+      this.isLoading.set(false)
+    } else {
+      this.errorMessage.set('Erro ao buscar última nota lida');
+      this.isLoading.set(false)
+    }
   }
 
   fetchSpaces(): void {

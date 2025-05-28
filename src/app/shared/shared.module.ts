@@ -12,6 +12,7 @@ import { ThemeSwitcherButtonComponent } from './components/theme-switcher-button
 import { NotesListComponent } from './components/notes-list/notes-list.component';
 import { BackButtonComponent } from './components/back-button/back-button.component';
 import { ModalLayoutComponent } from './components/modal-layout/modal-layout.component';
+import { LastReadNoteComponent } from './components/last-read-note/last-read-note.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { ModalLayoutComponent } from './components/modal-layout/modal-layout.com
     NotesListComponent,
     BackButtonComponent,
     ModalLayoutComponent,
+    LastReadNoteComponent
   ],
   exports: [
     CustomInputComponent,
@@ -42,6 +44,7 @@ import { ModalLayoutComponent } from './components/modal-layout/modal-layout.com
     NotesListComponent,
     BackButtonComponent,
     ModalLayoutComponent,
+    LastReadNoteComponent
   ]
 })
 export class SharedModule { }

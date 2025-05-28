@@ -19,16 +19,7 @@
     <div class="content">
         <div class="resume-lastest-note">
             <h3>Continue de onde parou</h3>
-
-            <div class="latest-note-card">
-                <div class="latest-note-card-icon">
-                    <i class="material-icons-outlined icon">edit</i>
-                </div>
-                <div class="latest-note-card-content">
-                    <h4>Nome da Nota</h4>
-                    <p class="note-description">Descrição da nota</p>
-                </div>
-            </div>
+            <app-last-read-note [lastReadNote]="lastReadNote()"></app-last-read-note>
         </div>
         <app-manage-spaces [spaces]="spaces()"></app-manage-spaces>
     </div>

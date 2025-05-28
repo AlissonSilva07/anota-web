@@ -1,0 +1,13 @@
+@if (lastReadNote()) {
+<button (click)="onNavigate(lastReadNote()?.spaceID!, lastReadNote()?.id!)" class="latest-note-card">
+    <div class="latest-note-card-icon">
+        <i class="material-icons-outlined icon">edit</i>
+    </div>
+    <div class="latest-note-card-content">
+        <h4 class="note-title">{{ lastReadNote()?.title }}</h4>
+        <p class="note-description">{{ lastReadNote()?.content }}</p>
+    </div>
+</button>
+} @else {
+<p>Abra uma nota de seus espaços.</p>
+}

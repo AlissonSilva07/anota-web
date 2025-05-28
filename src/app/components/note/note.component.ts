@@ -93,6 +93,7 @@ export class NoteComponent implements OnInit {
       next: (note) => {
         if (note) {
           this.fillFormWithNoteData(note);
+          this.noteService.saveLastReadNote(note);
         } else {
           this.errorMessage.set('Nota não encontrada.');
           this.toastService.error('A nota que você tentou carregar não foi encontrada.', 4000);
