@@ -21,7 +21,13 @@
             <h3>Continue de onde parou</h3>
             <app-last-read-note [lastReadNote]="lastReadNote()"></app-last-read-note>
         </div>
-        <app-manage-spaces [spaces]="spaces()"></app-manage-spaces>
+        <div class="manage-spaces">
+            <h3>Gerencie seus espaços</h3>
+            <app-manage-spaces [spaces]="spaces()"></app-manage-spaces>
+            <div class="link-area">
+                <a class="link-style" href="/">Criar novo Espaço</a>
+            </div>
+        </div>
     </div>
     <app-floating-action-button link="/main/nova-nota"></app-floating-action-button>
 </div>
